@@ -110,17 +110,34 @@ top_cited = (
     df_filtered
     .sort_values("citation_count", ascending=False)
     .head(10)
+    .copy()
+)
+
+# Acortar títulos largos
+top_cited["short_title"] = top_cited["title"].apply(
+    lambda x: x[:60] + "..." if len(str(x)) > 60 else str(x)
 )
 
 fig_cited = px.bar(
     top_cited,
     x="citation_count",
-    y="title",
-    orientation="h"
+    y="short_title",
+    orientation="h",
+    hover_data=["title"],  # muestra título completo al pasar el mouse
+    labels={
+        "citation_count": "Número de citas",
+        "short_title": "Artículo"
+    }
+)
+
+fig_cited.update_layout(
+    height=700,
+    yaxis={
+        "categoryorder": "total ascending"
+    }
 )
 
 st.plotly_chart(fig_cited, use_container_width=True)
-
 # ======================
 # TOP REVISTAS
 # ======================
