@@ -25,19 +25,29 @@ st.markdown("""
 """)
 
 # ======================
-# CARGA CSV
+# CSV
 # ======================
 
+st.sidebar.header("Fuente de datos")
+
 uploaded_file = st.sidebar.file_uploader(
-    "Sube el CSV exportado desde Scopus",
+    "Subir otro CSV",
     type=["csv"]
 )
 
-if uploaded_file is None:
-    st.info("👈 Sube tu archivo CSV para comenzar.")
-    st.stop()
+GITHUB_CSV_URL = "AQUI_VA_TU_URL_RAW"
 
-df = pd.read_csv(uploaded_file)
+if uploaded_file is not None:
+
+    df = pd.read_csv(uploaded_file)
+
+    st.sidebar.success("CSV cargado manualmente")
+
+else:
+
+    df = pd.read_csv(GITHUB_CSV_URL)
+
+    st.sidebar.success("CSV cargado desde GitHub")
 
 # ======================
 # LIMPIEZA
