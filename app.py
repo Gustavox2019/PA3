@@ -35,7 +35,7 @@ uploaded_file = st.sidebar.file_uploader(
     type=["csv"]
 )
 
-GITHUB_CSV_URL = "AQUI_VA_TU_URL_RAW"
+GITHUB_CSV_URL = "https://github.com/Gustavox2019/PA3/blob/main/scopus_inventory_ai.csv"
 
 if uploaded_file is not None:
 
